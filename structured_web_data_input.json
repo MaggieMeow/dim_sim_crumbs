@@ -1,0 +1,93 @@
+[
+    {
+        "name": "Non-Food",
+        "children": [
+            {
+                "name": "Community Events",
+                "children": [
+                    {
+                        "name": "Other",
+                        "children": []
+                    },
+                    {
+                        "name": "Funeral for Chinese Mason",
+                        "children": []
+                    },
+                    {
+                        "name": "McKenzie's Chinese Dinner for Youngsters",
+                        "children": []
+                    },
+                    {
+                        "name": "\"Dim Sim Do\" Fundraising for War Nurses",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "Theatre & Entertainment",
+                "children": []
+            },
+            {
+                "name": "Dog Show",
+                "children": []
+            },
+            {
+                "name": "Programme Schedule",
+                "children": []
+            },
+            {
+                "name": "Quiz",
+                "children": []
+            },
+            {
+                "name": "Horse Race",
+                "children": []
+            },
+            {
+                "name": "Social Events",
+                "children": []
+            },
+            {
+                "name": "Government & Politics",
+                "children": []
+            },
+            {
+                "name": "Local News",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "Food",
+        "children": [
+            {
+                "name": "Recipe",
+                "children": []
+            },
+            {
+                "name": "Restaurant Review",
+                "children": []
+            },
+            {
+                "name": "Health & Diet",
+                "children": []
+            },
+            {
+                "name": "Food Product Trade",
+                "children": []
+            },
+            {
+                "name": "Fish & Chips",
+                "children": []
+            },
+            {
+                "name": "Middle Eastern Food",
+                "children": []
+            },
+            {
+                "name": "Food Guide",
+                "children": []
+            }
+        ]
+    }
+]
