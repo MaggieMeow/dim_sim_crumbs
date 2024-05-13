@@ -7,53 +7,65 @@
                 "children": [
                     {
                         "name": "Other",
-                        "children": []
+                        "children": [],
+                        "value": 1
                     },
                     {
                         "name": "Funeral for Chinese Mason",
-                        "children": []
+                        "children": [],
+                        "value": 1
                     },
                     {
                         "name": "McKenzie's Chinese Dinner for Youngsters",
-                        "children": []
+                        "children": [],
+                        "value": 1
                     },
                     {
                         "name": "\"Dim Sim Do\" Fundraising for War Nurses",
-                        "children": []
+                        "children": [],
+                        "value": 1
                     }
                 ]
             },
             {
                 "name": "Theatre & Entertainment",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Dog Show",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Programme Schedule",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Quiz",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Horse Race",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Social Events",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Government & Politics",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Local News",
-                "children": []
+                "children": [],
+                "value": 1
             }
         ]
     },
@@ -62,31 +74,38 @@
         "children": [
             {
                 "name": "Recipe",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Restaurant Review",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Health & Diet",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Food Product Trade",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Fish & Chips",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Middle Eastern Food",
-                "children": []
+                "children": [],
+                "value": 1
             },
             {
                 "name": "Food Guide",
-                "children": []
+                "children": [],
+                "value": 1
             }
         ]
     }
