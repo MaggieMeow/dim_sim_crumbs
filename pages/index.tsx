@@ -57,12 +57,12 @@ export default function Home() {
 
         <div
           ref={chart}
-          className={`absolute bottom-[200px] right-[200px] ${
+          className={`absolute bottom-[10%] right-[10%] ${
             sunburstActive ? 'pointer-events-auto' : 'pointer-events-none'
           }`}
           style={{
-            height: '1500px',
-            width: '1500px',
+            height: '1000px',
+            width: '1000px',
           }}
         />
       </motion.div>

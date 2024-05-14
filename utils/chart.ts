@@ -1,102 +1,116 @@
-var data = [
+const data = [
   {
-    name: 'Grandpa',
+    name: 'Non-Food',
     children: [
       {
-        name: 'Uncle Leo',
-        value: 15,
+        name: 'Community Events',
         children: [
           {
-            name: 'Cousin Jack',
-            value: 2,
+            name: 'Other',
+            children: [],
+            value: 1,
           },
           {
-            name: 'Cousin Mary',
-            value: 5,
-            children: [
-              {
-                name: 'Jackson',
-                value: 2,
-              },
-            ],
+            name: 'Funeral for Chinese Mason',
+            children: [],
+            value: 1,
           },
           {
-            name: 'Cousin Ben',
-            value: 4,
-          },
-        ],
-      },
-      {
-        name: 'Aunt Jane',
-        children: [
-          {
-            name: 'Cousin Kate',
-            value: 4,
-          },
-        ],
-      },
-      {
-        name: 'Father',
-        value: 10,
-        children: [
-          {
-            name: 'Me',
-            value: 5,
-            itemStyle: {
-              color: 'red',
-            },
+            name: "McKenzie's Chinese Dinner for Youngsters",
+            children: [],
+            value: 1,
           },
           {
-            name: 'Brother Peter',
+            name: '"Dim Sim Do" Fundraising for War Nurses',
+            children: [],
             value: 1,
           },
         ],
       },
-    ],
-  },
-  {
-    name: 'Mike',
-    children: [
       {
-        name: 'Uncle Dan',
-        children: [
-          {
-            name: 'Cousin Lucy',
-            value: 3,
-          },
-          {
-            name: 'Cousin Luck',
-            value: 4,
-            children: [
-              {
-                name: 'Nephew',
-                value: 2,
-              },
-            ],
-          },
-        ],
+        name: 'Theatre & Entertainment',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Dog Show',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Programme Schedule',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Quiz',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Horse Race',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Social Events',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Government & Politics',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Local News',
+        children: [],
+        value: 1,
       },
     ],
   },
   {
-    name: 'Nancy',
+    name: 'Food',
     children: [
       {
-        name: 'Uncle Nike',
-        children: [
-          {
-            name: 'Cousin Betty',
-            value: 1,
-          },
-          {
-            name: 'Cousin Jenny',
-            value: 2,
-          },
-        ],
+        name: 'Recipe',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Restaurant Review',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Health & Diet',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Food Product Trade',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Fish & Chips',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Middle Eastern Food',
+        children: [],
+        value: 1,
+      },
+      {
+        name: 'Food Guide',
+        children: [],
+        value: 1,
       },
     ],
   },
 ];
+
 export const option = {
   visualMap: {
     type: 'continuous',
@@ -109,6 +123,7 @@ export const option = {
   series: {
     type: 'sunburst',
     data: data,
+    center: ['50%', '48%'],
     radius: [0, '90%'],
     label: {
       rotate: 'radial',
