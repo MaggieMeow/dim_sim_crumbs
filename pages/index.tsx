@@ -5,7 +5,7 @@ import {useState} from 'react';
 import ReactECharts from 'echarts-for-react'; // or var ReactECharts = require('echarts-for-react');
 
 const inter = Inter({subsets: ['latin']});
-console.log(123);
+
 export default function Home() {
   const [sunburstActive, setSunburstActive] = useState(false);
   console.log(sunburstActive);
@@ -36,9 +36,12 @@ export default function Home() {
         //     : 'fixed top-0 right-0 bg-white rounded-full h-96 w-96 '
         // }`}
       >
-        <div className="">
+        <div>
           <ReactECharts
-            className="absolute bottom-[200px] right-[200px]"
+            lazyUpdate={true}
+            className={`absolute bottom-[200px] right-[200px] ${
+              sunburstActive ? 'pointer-events-auto' : 'pointer-events-none'
+            }`}
             style={{
               height: '1500px',
               width: '1500px',
