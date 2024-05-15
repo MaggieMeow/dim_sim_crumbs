@@ -6,15 +6,7 @@ import {useRouter} from 'next/router';
 export function Chart({className}: {className?: string}) {
   const hasRendered = useRef(false);
   const chart = useRef<HTMLDivElement>(null);
-  const {query} = useRouter();
-  const subcat = query.subcat
-    ? decodeURIComponent(query.subcat as string)
-    : null;
-  useEffect(() => {
-    if (subcat) {
-      console.log({subcat});
-    }
-  }, [subcat]);
+
   useEffect(() => {
     const listener = (e: MessageEvent) => {
       if (e.data.name === 'navigate') {

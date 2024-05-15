@@ -14,7 +14,8 @@ export default function Home() {
   useEffect(() => {
     const listener = (e: MessageEvent) => {
       if (e.data.name === 'navigate') {
-        push('/items', {
+        push({
+          pathname: '/items',
           query: {subcat: e.data.subcat},
         });
       }

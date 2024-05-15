@@ -4,12 +4,28 @@ import {Inter} from 'next/font/google';
 import {useEffect, useRef, useState} from 'react';
 import * as echarts from 'echarts';
 import {option} from '@/utils/chart';
+import {useRouter} from 'next/router';
+import catMap from '../category_id.json';
+import articles from '../keyed_article_data.json';
 
 const inter = Inter({subsets: ['latin']});
 export default function Home() {
   const [sunburstActive, setSunburstActive] = useState(false);
   const chart = useRef<HTMLDivElement>(null);
   console.log({sunburstActive});
+  const {query} = useRouter();
+  const subcat = query.subcat
+    ? decodeURIComponent(query.subcat as string)
+    : null;
+  useEffect(() => {
+    console.log('!!');
+    if (subcat) {
+      console.log({subcat}, catMap);
+      const articleIds = (catMap as any)[subcat];
+      console.log({articleIds});
+    }
+  }, [subcat]);
+
   const hasRendered = useRef(false);
 
   useEffect(() => {
@@ -20,6 +36,14 @@ export default function Home() {
       hasRendered.current = true;
     }
   }, []);
+
+  const matchedArticles = [
+    articles['198674229'],
+    articles['261327215'],
+    articles['116423325'],
+    articles['261329485'],
+  ];
+  console.log(matchedArticles);
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -66,6 +90,23 @@ export default function Home() {
           }}
         />
       </motion.div>
+
+      <div>
+        {matchedArticles.map((article) => (
+          <div key={JSON.stringify(article)} className="flex space-x-4">
+            <Image
+              src={article.thumbnailUrl}
+              alt={article.title}
+              width={200}
+              height={200}
+            />
+            <div>
+              <h2>{article.title}</h2>
+              <p>{article.abstrct}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
