@@ -6,7 +6,22 @@ import * as echarts from 'echarts';
 import {option} from '@/utils/chart';
 import {useRouter} from 'next/router';
 import catMap from '../category_id.json';
-import articles from '../keyed_article_data.json';
+import articlesRaw from '../keyed_article_data.json';
+import {ArticleCard} from '@/components/article-card';
+import {Dialog, DialogContent, DialogTrigger} from '@/components/ui/dialog';
+import {Article} from '@/components/article';
+export type Article = {
+  categories: string[];
+  title: string;
+  abstrct: string;
+  date: string;
+  authors: string;
+  year: number;
+  articleType: string;
+  newspaper: string;
+  thumbnailUrl: string;
+};
+const articles = articlesRaw as unknown as Record<string, Article>;
 
 const inter = Inter({subsets: ['latin']});
 export default function Home() {
@@ -19,11 +34,6 @@ export default function Home() {
     : null;
   useEffect(() => {
     console.log('!!');
-    if (subcat) {
-      console.log({subcat}, catMap);
-      const articleIds = (catMap as any)[subcat];
-      console.log({articleIds});
-    }
   }, [subcat]);
 
   const hasRendered = useRef(false);
@@ -37,13 +47,21 @@ export default function Home() {
     }
   }, []);
 
-  const matchedArticles = [
-    articles['198674229'],
-    articles['261327215'],
-    articles['116423325'],
-    articles['261329485'],
-  ];
+  let matchedArticles: (Article & {id: string})[] = [];
+  if (subcat) {
+    console.log({subcat}, catMap);
+    const articleIds = (catMap as any)[subcat];
+
+    if (articleIds) {
+      matchedArticles = articleIds.map((id: number) =>
+        articles[id] ? {...articles[id], id} : {},
+      );
+    }
+  }
+
   console.log(matchedArticles);
+
+  const [activeId, setActiveArticle] = useState<string | null>(null);
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -90,23 +108,24 @@ export default function Home() {
           }}
         />
       </motion.div>
-
-      <div>
-        {matchedArticles.map((article) => (
-          <div key={JSON.stringify(article)} className="flex space-x-4">
-            <Image
-              src={article.thumbnailUrl}
-              alt={article.title}
-              width={200}
-              height={200}
+      <Dialog>
+        <div className="grid grid-cols-3 gap-4">
+          {matchedArticles.map((article) => (
+            <ArticleCard
+              key={article.id}
+              {...article}
+              Trigger={DialogTrigger}
+              onClick={() => {
+                setActiveArticle(article.id);
+              }}
             />
-            <div>
-              <h2>{article.title}</h2>
-              <p>{article.abstrct}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+
+        <DialogContent className="min-w-[80vw] min-h-[60vh]">
+          <Article id={activeId} />
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
