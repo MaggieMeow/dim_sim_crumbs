@@ -1,9 +1,13 @@
+import * as echarts from 'echarts';
+import {type SunburstSeriesOption} from 'echarts';
+
 const data = [
   {
     name: 'Non-Food',
     children: [
       {
         name: 'Community Events',
+
         children: [
           {
             name: 'Other',
@@ -113,6 +117,7 @@ const data = [
 
 export const option = {
   visualMap: {
+    show: false,
     type: 'continuous',
     min: 0,
     max: 10,
@@ -120,13 +125,35 @@ export const option = {
       color: ['#2F93C8', '#AEC48F', '#FFDB5C', '#F98862'],
     },
   },
+  tooltip: {
+    trigger: 'item',
+    // appendTo: 'body',
+    showDelay: 300,
+    // hideDelay: 1000,
+    // alwaysShowContent: true,
+    transitionDuration: 0.3,
+    position: 'inside',
+    enterable: true,
+    extraCssText: 'pointer-events: auto!important;',
+  },
+
   series: {
+    tooltip: {
+      formatter: function (data: any) {
+        const subcat = data.data.name;
+        const encoded = encodeURIComponent(subcat);
+        const message = `{name: 'navigate', subcat: '${encoded}'}`;
+        return `<div style="cursor:pointer;" onclick="window.postMessage(${message});">Click me</div>`;
+      },
+    },
     type: 'sunburst',
+    name: 'sunburst',
+
     data: data,
     center: ['50%', '48%'],
     radius: [0, '90%'],
-    label: {
-      rotate: 'radial',
-    },
+    // label: {
+    //   rotate: 'radial',
+    // },
   },
 };

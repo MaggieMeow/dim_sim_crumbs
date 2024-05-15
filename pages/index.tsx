@@ -2,70 +2,61 @@ import Image from 'next/image';
 import {motion} from 'framer-motion';
 import {Inter} from 'next/font/google';
 import {useEffect, useRef, useState} from 'react';
-import * as echarts from 'echarts';
-import {option} from '@/utils/chart';
+import {Chart} from '@/components/chart';
+import {useRouter} from 'next/router';
 
 const inter = Inter({subsets: ['latin']});
 export default function Home() {
   const [sunburstActive, setSunburstActive] = useState(false);
   const chart = useRef<HTMLDivElement>(null);
   console.log({sunburstActive});
-  const hasRendered = useRef(false);
-
+  const {push} = useRouter();
   useEffect(() => {
-    if (hasRendered.current) return;
-    if (chart.current) {
-      const myChart = echarts.init(chart.current);
-      myChart.setOption(option);
-      hasRendered.current = true;
-    }
+    const listener = (e: MessageEvent) => {
+      if (e.data.name === 'navigate') {
+        push('/items', {
+          query: {subcat: e.data.subcat},
+        });
+      }
+    };
+    window.addEventListener('message', listener);
+
+    return () => {
+      window.removeEventListener('message', listener);
+    };
   }, []);
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <motion.div
-        onClick={() => {
-          setSunburstActive(true);
-        }}
-        animate={{
-          scale: sunburstActive ? 1 : 0.2,
-        }}
-        transition={{
-          type: 'spring',
-          bounce: 0.15,
-        }}
-        // layout
-        initial={{
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-        className="fixed top-0 left-0 bg-white rounded-full h-[3000px] w-[3000px]"
-      >
-        <motion.button
-          animate={{
-            opacity: sunburstActive ? 1 : 0,
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            setSunburstActive((prev) => !prev);
-          }}
-          className="absolute top-[50%] left-[50%] p-4 bg-black text-white z-10"
-        >
-          Close
-        </motion.button>
-
-        <div
-          ref={chart}
-          className={`absolute bottom-[10%] right-[10%] ${
-            sunburstActive ? 'pointer-events-auto' : 'pointer-events-none'
-          }`}
-          style={{
-            height: '1000px',
-            width: '1000px',
-          }}
-        />
-      </motion.div>
-    </main>
+    <div className="">
+      <h1 className="mx-auto w-fit text-4xl">THIS IS A BIG ASS TITLE</h1>
+      <main>
+        <Chart />
+        <div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
+            facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa
+            provident distinctio earum perspiciatis enim ex maxime veritatis
+            praesentium ut. Tempora!
+          </p>{' '}
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
+            facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa
+            provident distinctio earum perspiciatis enim ex maxime veritatis
+            praesentium ut. Tempora!
+          </p>{' '}
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
+            facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa
+            provident distinctio earum perspiciatis enim ex maxime veritatis
+            praesentium ut. Tempora!
+          </p>{' '}
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
+            facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa
+            provident distinctio earum perspiciatis enim ex maxime veritatis
+            praesentium ut. Tempora!
+          </p>
+        </div>
+      </main>
+    </div>
   );
 }
