@@ -1,11 +1,11 @@
-import '@/styles/globals.css';
-import type {AppProps} from 'next/app';
-import Head from 'next/head';
-import {useRouter} from 'next/router';
-import {useEffect} from 'react';
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function App({Component, pageProps}: AppProps) {
-  const {push} = useRouter();
+export default function App({ Component, pageProps }: AppProps) {
+  const { push } = useRouter();
   return (
     <>
       <div className={``}>
@@ -17,7 +17,7 @@ export default function App({Component, pageProps}: AppProps) {
           <button
             className="fixed top-0 right-0"
             onClick={() => {
-              push('/');
+              push("/");
             }}
           >
             Menu

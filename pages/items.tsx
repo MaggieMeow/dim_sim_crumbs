@@ -99,12 +99,12 @@ export default function Home() {
 
         <div
           ref={chart}
-          className={`absolute bottom-[10%] right-[10%] ${
+          className={`absolute bottom-[20%] right-[20%] ${
             sunburstActive ? "pointer-events-auto" : "pointer-events-none"
           }`}
           style={{
-            height: "1000px",
-            width: "1000px",
+            height: "800px",
+            width: "800px",
           }}
         />
       </motion.div>
@@ -114,6 +114,7 @@ export default function Home() {
             <ArticleCard
               key={article.id}
               {...article}
+              id={article.id}
               Trigger={DialogTrigger}
               onClick={() => {
                 setActiveArticle(article.id);

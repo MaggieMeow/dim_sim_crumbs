@@ -132,7 +132,7 @@ export const option = {
     // hideDelay: 1000,
     // alwaysShowContent: true,
     transitionDuration: 0.3,
-    position: "inside",
+    position: "right",
     enterable: true,
     extraCssText: "pointer-events: auto!important;",
   },
@@ -151,9 +151,9 @@ export const option = {
 
     data: data,
     center: ["50%", "48%"],
-    radius: [0, "90%"],
+    radius: [0, "70%"],
     label: {
-      width: 120,
+      width: 100,
       overflow: "break",
     },
   },
