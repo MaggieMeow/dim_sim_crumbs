@@ -1,55 +1,58 @@
-import Image from 'next/image';
-import {motion} from 'framer-motion';
-import {Inter} from 'next/font/google';
-import {useEffect, useRef, useState} from 'react';
-import {Chart} from '@/components/chart';
-import {useRouter} from 'next/router';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Inter } from "next/font/google";
+import { useEffect, useRef, useState } from "react";
+import { Chart } from "@/components/chart";
+import { useRouter } from "next/router";
 
-const inter = Inter({subsets: ['latin']});
+const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [sunburstActive, setSunburstActive] = useState(false);
   const chart = useRef<HTMLDivElement>(null);
-  console.log({sunburstActive});
-  const {push} = useRouter();
+  console.log({ sunburstActive });
+  const { push } = useRouter();
   useEffect(() => {
     const listener = (e: MessageEvent) => {
-      if (e.data.name === 'navigate') {
+      if (e.data.name === "navigate") {
         push({
-          pathname: '/items',
-          query: {subcat: e.data.subcat},
+          pathname: "/items",
+          query: { subcat: e.data.subcat },
         });
       }
     };
-    window.addEventListener('message', listener);
+    window.addEventListener("message", listener);
 
     return () => {
-      window.removeEventListener('message', listener);
+      window.removeEventListener("message", listener);
     };
   }, []);
   return (
     <div className="">
-      <h1 className="mx-auto w-fit text-4xl">THIS IS A BIG ASS TITLE</h1>
+      <h1 className="mx-auto w-fit text-4xl">Dim Sim Crumbs</h1>
+      <h2 className="mx-auto w-fit text-3xl">
+        Historical Australian Newspaper Articles on Dim Sims
+      </h2>
       <main>
-        <Chart />
-        <div>
+        <Chart className="my-3 mx-auto" />
+        <div className="mx-auto max-w-prose">
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
             facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa
             provident distinctio earum perspiciatis enim ex maxime veritatis
             praesentium ut. Tempora!
-          </p>{' '}
+          </p>{" "}
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
             facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa
             provident distinctio earum perspiciatis enim ex maxime veritatis
             praesentium ut. Tempora!
-          </p>{' '}
+          </p>{" "}
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
             facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa
             provident distinctio earum perspiciatis enim ex maxime veritatis
             praesentium ut. Tempora!
-          </p>{' '}
+          </p>{" "}
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
             facilis, quas hic id assumenda perferendis aliquam numquam quos ipsa

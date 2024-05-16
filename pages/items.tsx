@@ -1,15 +1,15 @@
-import Image from 'next/image';
-import {motion} from 'framer-motion';
-import {Inter} from 'next/font/google';
-import {useEffect, useRef, useState} from 'react';
-import * as echarts from 'echarts';
-import {option} from '@/utils/chart';
-import {useRouter} from 'next/router';
-import catMap from '../category_id.json';
-import articlesRaw from '../keyed_article_data.json';
-import {ArticleCard} from '@/components/article-card';
-import {Dialog, DialogContent, DialogTrigger} from '@/components/ui/dialog';
-import {Article} from '@/components/article';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Inter } from "next/font/google";
+import { useEffect, useRef, useState } from "react";
+import * as echarts from "echarts";
+import { option } from "@/utils/chart";
+import { useRouter } from "next/router";
+import catMap from "../category_id.json";
+import articlesRaw from "../keyed_article_data.json";
+import { ArticleCard } from "@/components/article-card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Article } from "@/components/article";
 export type Article = {
   categories: string[];
   title: string;
@@ -23,17 +23,17 @@ export type Article = {
 };
 const articles = articlesRaw as unknown as Record<string, Article>;
 
-const inter = Inter({subsets: ['latin']});
+const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [sunburstActive, setSunburstActive] = useState(false);
   const chart = useRef<HTMLDivElement>(null);
-  console.log({sunburstActive});
-  const {query} = useRouter();
+  console.log({ sunburstActive });
+  const { query } = useRouter();
   const subcat = query.subcat
     ? decodeURIComponent(query.subcat as string)
     : null;
   useEffect(() => {
-    console.log('!!');
+    console.log("!!");
   }, [subcat]);
 
   const hasRendered = useRef(false);
@@ -47,14 +47,14 @@ export default function Home() {
     }
   }, []);
 
-  let matchedArticles: (Article & {id: string})[] = [];
+  let matchedArticles: (Article & { id: string })[] = [];
   if (subcat) {
-    console.log({subcat}, catMap);
+    console.log({ subcat }, catMap);
     const articleIds = (catMap as any)[subcat];
 
     if (articleIds) {
       matchedArticles = articleIds.map((id: number) =>
-        articles[id] ? {...articles[id], id} : {},
+        articles[id] ? { ...articles[id], id } : {}
       );
     }
   }
@@ -71,16 +71,16 @@ export default function Home() {
           setSunburstActive(true);
         }}
         animate={{
-          scale: sunburstActive ? 1 : 0.2,
+          scale: sunburstActive ? 1 : 0.1,
         }}
         transition={{
-          type: 'spring',
+          type: "spring",
           bounce: 0.15,
         }}
         // layout
         initial={{
-          translateX: '-50%',
-          translateY: '-50%',
+          translateX: "-50%",
+          translateY: "-50%",
         }}
         className="fixed top-0 left-0 bg-white rounded-full h-[3000px] w-[3000px]"
       >
@@ -100,11 +100,11 @@ export default function Home() {
         <div
           ref={chart}
           className={`absolute bottom-[10%] right-[10%] ${
-            sunburstActive ? 'pointer-events-auto' : 'pointer-events-none'
+            sunburstActive ? "pointer-events-auto" : "pointer-events-none"
           }`}
           style={{
-            height: '1000px',
-            width: '1000px',
+            height: "1000px",
+            width: "1000px",
           }}
         />
       </motion.div>
