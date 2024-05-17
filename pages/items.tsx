@@ -36,7 +36,31 @@ export default function Home() {
     console.log("!!");
   }, [subcat]);
 
+  const { push } = useRouter();
+
   const hasRendered = useRef(false);
+
+  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setSunburstActive((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const listener = (e: MessageEvent) => {
+      if (e.data.name === "navigate") {
+        push({
+          pathname: "/items",
+          query: { subcat: e.data.subcat },
+        });
+        setSunburstActive((prev) => !prev);
+      }
+    };
+    window.addEventListener("message", listener);
+
+    return () => {
+      window.removeEventListener("message", listener);
+    };
+  }, []);
 
   useEffect(() => {
     if (hasRendered.current) return;
@@ -88,10 +112,7 @@ export default function Home() {
           animate={{
             opacity: sunburstActive ? 1 : 0,
           }}
-          onClick={(e) => {
-            e.stopPropagation();
-            setSunburstActive((prev) => !prev);
-          }}
+          onClick={handleClose}
           className="absolute top-[50%] left-[50%] p-4 bg-black text-white z-10"
         >
           Close
