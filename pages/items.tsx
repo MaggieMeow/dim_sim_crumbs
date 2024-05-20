@@ -64,6 +64,9 @@ function getCatList(name: string, categories: Category[]): string[] | null {
 
 export default function Home() {
   useLayoutEffect(() => {
+    if (localStorage.getItem("items-onboarding")) {
+      return;
+    }
     const driverObj = driver({
       overlayColor: "rgb(255 255 255 / 43%)",
       showProgress: true,
@@ -97,6 +100,7 @@ export default function Home() {
       ],
     });
     driverObj.drive();
+    localStorage.setItem("items-onboarding", "true");
   }, []);
 
   const [sunburstActive, setSunburstActive] = useState(false);

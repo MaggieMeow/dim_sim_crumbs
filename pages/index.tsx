@@ -9,6 +9,9 @@ import { driver } from "driver.js";
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   useLayoutEffect(() => {
+    if (localStorage.getItem("home-onboarding")) {
+      return;
+    }
     const driverObj = driver({
       overlayColor: "rgb(255 255 255 / 43%)",
       showProgress: true,
@@ -31,6 +34,7 @@ export default function Home() {
       ],
     });
     driverObj.drive();
+    localStorage.setItem("home-onboarding", "true");
   }, []);
   const [sunburstActive, setSunburstActive] = useState(false);
   const chart = useRef<HTMLDivElement>(null);
