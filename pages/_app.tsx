@@ -2,12 +2,27 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import "driver.js/dist/driver.css";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
+  const path = useMemo(() => {
+    if (pathname.includes("items")) return "items";
+    if (pathname.includes("about")) return "about";
+    return "home";
+  }, [pathname]);
+  const [route, setRoute] = useState(path);
+
+  console.log({ path, route });
+
   return (
     <>
       <div className={``}>
@@ -16,15 +31,28 @@ export default function App({ Component, pageProps }: AppProps) {
         </Head>
 
         <div className="pt-12 max-w-7xl mx-auto">
-          <button
-            id="nav-menu"
-            className="fixed top-0 right-0"
-            onClick={() => {
-              push("/");
-            }}
-          >
-            Menu
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="absolute top-0 right-0">Menu</button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuRadioItem value="home" onClick={() => push("/")}>
+                Home
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="items"
+                onClick={() => push("/items?subcat=Rm9vZA%3D%3D")}
+              >
+                Items
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="about"
+                onClick={() => push("/about")}
+              >
+                About
+              </DropdownMenuRadioItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <Component {...pageProps} />
         </div>
