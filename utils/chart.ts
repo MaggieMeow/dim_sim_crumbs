@@ -141,6 +141,9 @@ export const option = {
     tooltip: {
       formatter: function (data: any) {
         const subcat = data.data.name;
+        if (subcat === "sunburst") {
+          return;
+        }
         const encoded = btoa(subcat);
 
         const message = `{name: 'navigate', subcat: '${encoded}'}`;
