@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export function ArticleCard(props: {
   id: string;
@@ -11,35 +11,29 @@ export function ArticleCard(props: {
   articleType: string;
   newspaper: string;
   thumbnailUrl: string;
-  Trigger: React.FC<{ children: React.ReactNode }>;
   onClick?: () => void;
 }) {
-  const Trigger = props.Trigger;
-  const trove_link = "https://trove.nla.gov.au/newspaper/article/" + props.id;
+  const trove_link = 'https://trove.nla.gov.au/newspaper/article/' + props.id;
   return (
     <div
       className="w-68 flex flex-col border-2 rounded-sm border-white p-4 hover:scale-105 transition-all ease-in-out"
       onClick={props.onClick}
     >
-      <Trigger>
-        <>
-          <Image
-            className="mx-auto"
-            src={props.thumbnailUrl}
-            alt={props.title}
-            width={200}
-            height={200}
-          />
-          <div className="text-left my-1">
-            <h2 className="font-bold py-1">{props.title}</h2>
-            <p>{props.date}</p>
-            <p className="">{props.newspaper}</p>
-          </div>
-          <a className="underline" href={trove_link} target="_blank">
-            Full Text
-          </a>
-        </>
-      </Trigger>
+      <img
+        className="mx-auto"
+        src={props.thumbnailUrl}
+        alt={props.title}
+        width={200}
+        height={200}
+      />
+      <div className="text-left my-1">
+        <h2 className="font-bold py-1">{props.title}</h2>
+        <p>{props.date}</p>
+        <p className="">{props.newspaper}</p>
+      </div>
+      <a className="underline" href={trove_link} target="_blank">
+        Full Text
+      </a>
     </div>
   );
 }

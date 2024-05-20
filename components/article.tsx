@@ -1,19 +1,19 @@
-import { Article as ArticleType } from "@/pages/items";
-import articlesRaw from "../keyed_article_data.json";
-import Image from "next/image";
+import {Article as ArticleType} from '@/pages/items';
+import articlesRaw from '../keyed_article_data.json';
+import Image from 'next/image';
 const articles = articlesRaw as unknown as Record<string, ArticleType>;
 
-export function Article({ id }: { id: string | null }) {
+export function Article({id}: {id: string | null}) {
   if (!id) return null;
   const article = articles[id as string];
-  const link = "https://trove.nla.gov.au/newspaper/article/" + id;
-  let authors = article.authors.replace(/[\[\]'"]/g, "");
+  const link = 'https://trove.nla.gov.au/newspaper/article/' + id;
+  let authors = article.authors.replace(/[\[\]'"]/g, '');
   if (authors.length === 0) {
-    authors = "Not Available";
+    authors = 'Not Available';
   }
   return (
     <div className=" flex flex-col items-center text-black">
-      <Image
+      <img
         src={article.thumbnailUrl}
         alt={article.title}
         width={200}
