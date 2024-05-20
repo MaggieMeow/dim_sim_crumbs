@@ -7,10 +7,21 @@ import { option } from "@/utils/chart";
 import { useRouter } from "next/router";
 import catMap from "../category_id.json";
 import articlesRaw from "../keyed_article_data.json";
+import categories from "../structured_web_data_input.json";
 import { ArticleCard } from "@/components/article-card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Article } from "@/components/article";
 import { driver } from "driver.js";
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import Link from "next/link";
 export type Article = {
   categories: string[];
   title: string;
@@ -23,8 +34,34 @@ export type Article = {
   thumbnailUrl: string;
 };
 const articles = articlesRaw as unknown as Record<string, Article>;
-
+interface Category {
+  name: string;
+  children: Category[];
+  value?: number;
+}
 const inter = Inter({ subsets: ["latin"] });
+function getCatList(name: string, categories: Category[]): string[] | null {
+  const path: string[] = [];
+
+  function findPath(categoryList: Category[], currentPath: string[]): boolean {
+    for (const category of categoryList) {
+      const newPath = [...currentPath, category.name];
+      if (category.name === name) {
+        path.push(...newPath);
+        return true;
+      }
+      if (category.children && findPath(category.children, newPath)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  findPath(categories, []);
+
+  return path.length > 0 ? path : null;
+}
+
 export default function Home() {
   useLayoutEffect(() => {
     const driverObj = driver({
@@ -120,10 +157,30 @@ export default function Home() {
   const triggerRef = useRef<any>(null);
 
   const [activeId, setActiveArticle] = useState<string | null>(null);
+
+  const breadcrumbList = getCatList(subcat!, categories);
+  console.log({ breadcrumbList });
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
+      <Breadcrumb className="pb-10">
+        <BreadcrumbList>
+          {breadcrumbList?.map((item) => {
+            return (
+              <>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href={`/items?subcat=${btoa(item)}`}>{item}</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+              </>
+            );
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
       <motion.div
         id="sun"
         onClick={() => {
