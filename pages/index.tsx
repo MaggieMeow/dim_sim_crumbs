@@ -1,12 +1,37 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Inter } from "next/font/google";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Chart } from "@/components/chart";
 import { useRouter } from "next/router";
+import { driver } from "driver.js";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
+  useLayoutEffect(() => {
+    const driverObj = driver({
+      overlayColor: "rgb(255 255 255 / 43%)",
+      showProgress: true,
+      steps: [
+        {
+          element: "#nav-menu",
+          popover: {
+            title: "This is a menu",
+            description: "Click on it to go back to the home page.",
+          },
+        },
+        {
+          element: "#chart",
+          popover: {
+            side: "top",
+            title: "This is a chart",
+            description: "Hover on a section to get a tooltip, click on it.",
+          },
+        },
+      ],
+    });
+    driverObj.drive();
+  }, []);
   const [sunburstActive, setSunburstActive] = useState(false);
   const chart = useRef<HTMLDivElement>(null);
   console.log({ sunburstActive });

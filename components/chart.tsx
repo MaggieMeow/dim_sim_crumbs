@@ -1,22 +1,22 @@
-import {useEffect, useRef} from 'react';
-import * as echarts from 'echarts';
-import {option} from '@/utils/chart';
-import {useRouter} from 'next/router';
+import { useEffect, useRef } from "react";
+import * as echarts from "echarts";
+import { option } from "@/utils/chart";
+import { useRouter } from "next/router";
 
-export function Chart({className}: {className?: string}) {
+export function Chart({ className }: { className?: string }) {
   const hasRendered = useRef(false);
   const chart = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const listener = (e: MessageEvent) => {
-      if (e.data.name === 'navigate') {
+      if (e.data.name === "navigate") {
         // push('/items');
       }
     };
-    window.addEventListener('message', listener);
+    window.addEventListener("message", listener);
 
     return () => {
-      window.removeEventListener('message', listener);
+      window.removeEventListener("message", listener);
     };
   }, []);
   useEffect(() => {
@@ -31,6 +31,7 @@ export function Chart({className}: {className?: string}) {
   return (
     <div
       ref={chart}
+      id="chart"
       className={`
 
       ${
@@ -38,8 +39,8 @@ export function Chart({className}: {className?: string}) {
         // sunburstActive ? 'pointer-events-auto' : 'pointer-events-none'
       }`}
       style={{
-        height: '1000px',
-        width: '1000px',
+        height: "1000px",
+        width: "1000px",
       }}
     />
   );

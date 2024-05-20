@@ -141,8 +141,12 @@ export const option = {
     tooltip: {
       formatter: function (data: any) {
         const subcat = data.data.name;
-        const encoded = encodeURIComponent(subcat);
+        const encoded = btoa(subcat);
+
         const message = `{name: 'navigate', subcat: '${encoded}'}`;
+        console.log(
+          `<div style="cursor:pointer;" onclick="window.postMessage(${message});">View articles</div>`
+        );
         return `<div style="cursor:pointer;" onclick="window.postMessage(${message});">View articles</div>`;
       },
     },
