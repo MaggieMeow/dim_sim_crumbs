@@ -73,9 +73,7 @@ export default function Home() {
       window.removeEventListener("message", listener);
     };
   }, []);
-  const [sunburstActive, setSunburstActive] = useState(false);
-  const chart = useRef<HTMLDivElement>(null);
-  console.log({ sunburstActive });
+
   const { push } = useRouter();
   useEffect(() => {
     const listener = (e: MessageEvent) => {

@@ -8,17 +8,18 @@ interface TreeNode {
 
 interface TreeProps {
   tree: TreeNode[];
+  onClick?: (e: any) => void;
 }
 
-export const CatList: React.FC<TreeProps> = ({ tree }) => {
+export const CatList: React.FC<TreeProps> = ({ tree, onClick }) => {
   const renderTree = (nodes: TreeNode[], level: number = 1) => {
-    console.log(nodes, level);
     return (
       <ul style={{ paddingLeft: level * 12 }}>
         {nodes.map((node) => (
           <li key={node.name}>
             <Link
               href={`/items?subcat=${btoa(node.name)}`}
+              onClick={onClick}
               className="hover:underline"
             >
               {node.name}

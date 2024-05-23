@@ -116,7 +116,6 @@ function onboard() {
 export default function Home() {
   useEffect(() => {
     const listener = (ev: any) => {
-      console.log(ev);
       if (ev.data === "show-help") {
         onboard();
       }
@@ -134,7 +133,6 @@ export default function Home() {
 
   const [sunburstActive, setSunburstActive] = useState(false);
   const chart = useRef<HTMLDivElement>(null);
-  console.log({ sunburstActive });
   const { query } = useRouter();
   const subcat = query.subcat ? atob(query.subcat as string) : null;
 
@@ -176,7 +174,6 @@ export default function Home() {
 
   let matchedArticles: (Article & { id: string })[] = [];
   if (subcat) {
-    console.log({ subcat }, catMap);
     const articleIds = (catMap as any)[subcat];
 
     if (articleIds) {
@@ -186,14 +183,11 @@ export default function Home() {
     }
   }
 
-  console.log({ accessibilityMode });
-
   const triggerRef = useRef<any>(null);
 
   const [activeId, setActiveArticle] = useState<string | null>(null);
 
   const breadcrumbList = getCatList(subcat!, categories);
-  console.log({ breadcrumbList });
 
   return (
     <main
@@ -287,7 +281,13 @@ export default function Home() {
               width: "800px",
             }}
           >
-            <CatList tree={categories} />
+            <CatList
+              tree={categories}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSunburstActive(false);
+              }}
+            />
           </div>
         )}
       </motion.div>
