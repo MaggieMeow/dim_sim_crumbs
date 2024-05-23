@@ -11,6 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HelpButton } from "@/components/help-button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useStore } from "@/components/store";
 
 export default function App({ Component, pageProps }: AppProps) {
   const { push, pathname } = useRouter();
@@ -21,16 +23,29 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [pathname]);
   const [route, setRoute] = useState(path);
 
-  console.log({ path, route });
+  const { accessibilityMode, setMode } = useStore();
 
   return (
     <>
-      <div className={``}>
+      <div className={`dark`}>
         <Head>
           <title>Dim Sim Crumbs</title>
         </Head>
 
         <div className="pt-12 max-w-7xl mx-auto">
+          <div className="flex space-x-2 top-6 right-36 absolute">
+            <Checkbox
+              checked={accessibilityMode}
+              onCheckedChange={setMode}
+              id="terms"
+            />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Accessibility View
+            </label>
+          </div>
           <HelpButton className="absolute top-4 right-24" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

@@ -22,6 +22,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
+import { useStore } from "@/components/store";
+import { CatList } from "@/components/CatList";
 const catDescMap: Record<string, string> = {
   '"Dim Sim Do" Fundraising for War Nurses': `The "Dim Sim Do" was an event held on Friday, May 16, 1941, at the Town Hall in Melbourne to raise funds for the War Nurses' Comforts Fund. It featured continuous stage entertainment by Chinese artists, a dim sim luncheon and a Chinese afternoon tea.`,
 };
@@ -160,6 +162,7 @@ export default function Home() {
       window.removeEventListener("message", listener);
     };
   }, []);
+  const { accessibilityMode } = useStore();
 
   useEffect(() => {
     if (hasRendered.current) return;
@@ -182,7 +185,7 @@ export default function Home() {
     }
   }
 
-  console.log(matchedArticles);
+  console.log({ accessibilityMode });
 
   const triggerRef = useRef<any>(null);
 
@@ -244,16 +247,32 @@ export default function Home() {
           Close
         </motion.button>
 
-        <div
-          ref={chart}
-          className={`absolute bottom-[20%] right-[20%] ${
-            sunburstActive ? "pointer-events-auto" : "pointer-events-none"
-          }`}
-          style={{
-            height: "800px",
-            width: "800px",
-          }}
-        />
+        <div className={accessibilityMode ? " opacity-0" : "opacity-100"}>
+          <div
+            aria-hidden={true}
+            ref={chart}
+            className={`absolute bottom-[20%] right-[20%] ${
+              sunburstActive ? "pointer-events-auto" : "pointer-events-none"
+            }`}
+            style={{
+              height: "800px",
+              width: "800px",
+            }}
+          />
+        </div>
+        {accessibilityMode && (
+          <div
+            className={`absolute bottom-[20%] right-[20%] ${
+              sunburstActive ? "pointer-events-auto" : "pointer-events-none"
+            } text-black`}
+            style={{
+              height: "800px",
+              width: "800px",
+            }}
+          >
+            <CatList tree={categories} />
+          </div>
+        )}
       </motion.div>
       <Dialog>
         <DialogTrigger ref={triggerRef} className="hidden" />

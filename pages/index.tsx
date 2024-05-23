@@ -5,6 +5,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Chart } from "@/components/chart";
 import { useRouter } from "next/router";
 import { driver } from "driver.js";
+import { useStore } from "@/components/store";
+import { CatList } from "@/components/CatList";
+import catTree from "../structured_web_data_input.json";
 
 function onboard() {
   const driverObj = driver({
@@ -52,6 +55,7 @@ function onboard() {
 }
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
+  const { accessibilityMode } = useStore();
   useEffect(() => {
     const listener = (ev: any) => {
       if (ev.data === "show-help") {
@@ -113,7 +117,13 @@ export default function Home() {
           </button> */}
         </div>
         <h2 className="mx-auto w-fit text-2xl">Find articles by category</h2>
-        <Chart className="my-2 mx-auto" />
+        {accessibilityMode ? (
+          <div className="my-2 flex justify-center">
+            <CatList tree={catTree} />
+          </div>
+        ) : (
+          <Chart className="my-2 mx-auto" />
+        )}
       </main>
     </div>
   );
