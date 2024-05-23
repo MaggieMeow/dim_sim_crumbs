@@ -119,19 +119,19 @@ export default function Home() {
         </div>
         <div className="flex items-center justify-center gap-8">
           <h2 className="w-fit text-2xl">Find articles by category</h2>
-          <div className="flex items-center space-x-2 ">
-            <Checkbox
-              checked={accessibilityMode}
-              onCheckedChange={setMode}
-              id="terms"
-            />
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Accessibility View
-            </label>
-          </div>
+        </div>
+        <div className="flex justify-center py-4 items-center space-x-2 ">
+          <Checkbox
+            checked={accessibilityMode}
+            onCheckedChange={setMode}
+            id="terms"
+          />
+          <label
+            htmlFor="terms"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Accessibility View
+          </label>
         </div>
         {accessibilityMode ? (
           <div className="my-2 flex justify-center">

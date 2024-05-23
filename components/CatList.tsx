@@ -11,12 +11,18 @@ interface TreeProps {
 }
 
 export const CatList: React.FC<TreeProps> = ({ tree }) => {
-  const renderTree = (nodes: TreeNode[], level: number = 0) => {
+  const renderTree = (nodes: TreeNode[], level: number = 1) => {
+    console.log(nodes, level);
     return (
-      <ul>
+      <ul style={{ paddingLeft: level * 12 }}>
         {nodes.map((node) => (
-          <li key={node.name} className={`pl-${level * 4}`}>
-            <Link href={`/items?subcat=${btoa(node.name)}`}>{node.name}</Link>
+          <li key={node.name}>
+            <Link
+              href={`/items?subcat=${btoa(node.name)}`}
+              className="hover:underline"
+            >
+              {node.name}
+            </Link>
             {node.children.length > 0 && renderTree(node.children, level + 1)}
           </li>
         ))}
