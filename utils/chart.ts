@@ -122,7 +122,7 @@ export const option = {
     min: 0,
     max: 10,
     inRange: {
-      color: ["#2F93C8", "#AEC48F", "#FFDB5C", "#F98862"],
+      color: ["#b5cdfa", "#ffa3a3", "#fab486"],
     },
   },
   tooltip: {
@@ -141,27 +141,31 @@ export const option = {
     tooltip: {
       formatter: function (data: any) {
         const subcat = data.data.name;
-        if (subcat === "sunburst") {
+        if (subcat === "sunburst" || subcat === "back") {
           return;
         }
         const encoded = btoa(subcat);
 
         const message = `{name: 'navigate', subcat: '${encoded}'}`;
-        console.log(
-          `<div style="cursor:pointer;" onclick="window.postMessage(${message});">View articles</div>`
-        );
-        return `<div style="cursor:pointer;" onclick="window.postMessage(${message});">View articles</div>`;
+        // console.log(
+        //   `<div style="cursor:pointer;" onclick="window.postMessage(${message});">View articles on ${subcat}</div>`
+        // );
+        return `<div style="cursor:pointer;" onclick="window.postMessage(${message});">View articles<br> on ${subcat}</div>`;
       },
     },
     type: "sunburst",
-    name: "sunburst",
+    name: "back",
 
     data: data,
     center: ["50%", "48%"],
-    radius: [0, "70%"],
+    radius: [0, "85%"],
     label: {
-      width: 100,
+      width: 90,
       overflow: "break",
+      rotate: "45",
+      textStyle: {
+        fontSize: 13,
+      },
     },
   },
 };

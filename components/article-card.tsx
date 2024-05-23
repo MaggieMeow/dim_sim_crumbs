@@ -22,11 +22,9 @@ export function ArticleCard(props: {
       onClick={props.onClick}
     >
       <img
-        className="mx-auto"
+        className="mx-auto object-contain w-72 h-72"
         src={props.thumbnailUrl}
         alt={props.title}
-        width={200}
-        height={200}
         loading="lazy"
       />
       <div className="text-left my-1">

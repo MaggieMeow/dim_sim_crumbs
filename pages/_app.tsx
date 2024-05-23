@@ -1,3 +1,4 @@
+import "driver.js/dist/driver.css";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -9,8 +10,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import "driver.js/dist/driver.css";
+import { HelpButton } from "@/components/help-button";
 
 export default function App({ Component, pageProps }: AppProps) {
   const { push, pathname } = useRouter();
@@ -31,9 +31,15 @@ export default function App({ Component, pageProps }: AppProps) {
         </Head>
 
         <div className="pt-12 max-w-7xl mx-auto">
+          <HelpButton className="absolute top-4 right-24" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="absolute top-0 right-0">Menu</button>
+              <button
+                id="nav-menu"
+                className="absolute top-4 right-4 hover:underline"
+              >
+                Menu
+              </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuRadioItem value="home" onClick={() => push("/")}>
@@ -43,7 +49,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 value="items"
                 onClick={() => push("/items?subcat=Rm9vZA%3D%3D")}
               >
-                Items
+                Articles
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem
                 value="about"

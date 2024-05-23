@@ -31,3 +31,18 @@ body {
     text-wrap: balance;
   }
 }
+
+/* driver js */
+.driver-popover.driverjs-theme {
+  max-width: 450px;
+}
+
+.driver-popover.driverjs-theme .driver-popover-title {
+  font-size: 20px;
+}
+
+.driver-popover.driverjs-theme button {
+}
+
+.driver-popover.driverjs-theme .driver-popover-navigation-btns {
+}

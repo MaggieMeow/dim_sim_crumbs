@@ -22,6 +22,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
+const catDescMap: Record<string, string> = {
+  '"Dim Sim Do" Fundraising for War Nurses': `The "Dim Sim Do" was an event held on Friday, May 16, 1941, at the Town Hall in Melbourne to raise funds for the War Nurses' Comforts Fund. It featured continuous stage entertainment by Chinese artists, a dim sim luncheon and a Chinese afternoon tea.`,
+};
 export type Article = {
   categories: string[];
   title: string;
@@ -61,46 +64,69 @@ function getCatList(name: string, categories: Category[]): string[] | null {
 
   return path.length > 0 ? path : null;
 }
-
+function onboard() {
+  const driverObj = driver({
+    popoverClass: "driverjs-theme",
+    overlayColor: "rgb(255 255 255 / 43%)",
+    showProgress: true,
+    steps: [
+      {
+        element: "[data-name='article-card']",
+        popover: {
+          side: "top",
+          title: "View article details",
+          description: "Click to view more details about the article",
+        },
+      },
+      // {
+      //   element: "[data-name='full-text']",
+      //   popover: {
+      //     side: "top",
+      //     title: "Read full article",
+      //     description:
+      //       "Click to open the article in Trove for its full text.",
+      //   },
+      // },
+      {
+        element: "#sun",
+        popover: {
+          side: "right",
+          align: "end",
+          title: "Category Navigation",
+          description: "Click to expand the category navigation panel.",
+        },
+      },
+      {
+        element: "#sun",
+        popover: {
+          side: "right",
+          align: "end",
+          title: "Navigate to other categories",
+          description: "You can navigate to other categories here.",
+        },
+      },
+    ],
+  });
+  driverObj.drive();
+  localStorage.setItem("items-onboarding", "true");
+}
 export default function Home() {
-  useLayoutEffect(() => {
+  useEffect(() => {
+    const listener = (ev: any) => {
+      console.log(ev);
+      if (ev.data === "show-help") {
+        onboard();
+      }
+    };
+    window.addEventListener("message", listener);
+
     if (localStorage.getItem("items-onboarding")) {
       return;
     }
-    const driverObj = driver({
-      overlayColor: "rgb(255 255 255 / 43%)",
-      showProgress: true,
-      steps: [
-        {
-          element: "#sun",
-          popover: {
-            side: "right",
-            align: "end",
-            title: "This is a sun",
-            description:
-              "Click on it to make it big. if it big chart go big, go big u can click",
-          },
-        },
-        {
-          element: "[data-name='article-card']",
-          popover: {
-            side: "top",
-            title: "This is a card",
-            description: "click to see details",
-          },
-        },
-        {
-          element: "[data-name='full-text']",
-          popover: {
-            side: "top",
-            title: "or click here to see original article",
-            description: "click to see details",
-          },
-        },
-      ],
-    });
-    driverObj.drive();
-    localStorage.setItem("items-onboarding", "true");
+    onboard();
+    return () => {
+      window.removeEventListener("message", listener);
+    };
   }, []);
 
   const [sunburstActive, setSunburstActive] = useState(false);
@@ -169,9 +195,11 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
-      <Breadcrumb className="pb-10">
+      <h1 className="text-3xl pb-4">{subcat ?? ""}</h1>
+      <p className="pb-4 max-w-prose">{catDescMap[subcat ?? ""]}</p>
+      <Breadcrumb className="pb-4">
         <BreadcrumbList>
-          {breadcrumbList?.map((item) => {
+          {breadcrumbList?.map((item, idx) => {
             return (
               <>
                 <BreadcrumbItem>
@@ -179,12 +207,13 @@ export default function Home() {
                     <Link href={`/items?subcat=${btoa(item)}`}>{item}</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                {idx < breadcrumbList.length - 1 && <BreadcrumbSeparator />}
               </>
             );
           })}
         </BreadcrumbList>
       </Breadcrumb>
+
       <motion.div
         id="sun"
         onClick={() => {
@@ -228,7 +257,7 @@ export default function Home() {
       </motion.div>
       <Dialog>
         <DialogTrigger ref={triggerRef} className="hidden" />
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+        <div className="py-8 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
           {matchedArticles.map((article) => (
             <ArticleCard
               key={article.id}
