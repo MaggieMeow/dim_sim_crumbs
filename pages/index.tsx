@@ -8,6 +8,7 @@ import { driver } from "driver.js";
 import { useStore } from "@/components/store";
 import { CatList } from "@/components/CatList";
 import catTree from "../structured_web_data_input.json";
+import { Checkbox } from "@/components/ui/checkbox";
 
 function onboard() {
   const driverObj = driver({
@@ -55,7 +56,7 @@ function onboard() {
 }
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
-  const { accessibilityMode } = useStore();
+  const { accessibilityMode, setMode } = useStore();
   useEffect(() => {
     const listener = (ev: any) => {
       if (ev.data === "show-help") {
@@ -116,7 +117,22 @@ export default function Home() {
             Show user guide
           </button> */}
         </div>
-        <h2 className="mx-auto w-fit text-2xl">Find articles by category</h2>
+        <div className="flex items-center justify-center gap-8">
+          <h2 className="w-fit text-2xl">Find articles by category</h2>
+          <div className="flex items-center space-x-2 ">
+            <Checkbox
+              checked={accessibilityMode}
+              onCheckedChange={setMode}
+              id="terms"
+            />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Accessibility View
+            </label>
+          </div>
+        </div>
         {accessibilityMode ? (
           <div className="my-2 flex justify-center">
             <CatList tree={catTree} />

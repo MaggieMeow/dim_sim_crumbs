@@ -23,8 +23,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [pathname]);
   const [route, setRoute] = useState(path);
 
-  const { accessibilityMode, setMode } = useStore();
-
   return (
     <>
       <div className={`dark`}>
@@ -33,19 +31,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </Head>
 
         <div className="pt-12 max-w-7xl mx-auto">
-          <div className="flex space-x-2 top-6 right-36 absolute">
-            <Checkbox
-              checked={accessibilityMode}
-              onCheckedChange={setMode}
-              id="terms"
-            />
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              Accessibility View
-            </label>
-          </div>
           <HelpButton className="absolute top-4 right-24" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

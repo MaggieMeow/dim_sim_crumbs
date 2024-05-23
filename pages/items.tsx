@@ -24,6 +24,7 @@ import {
 import Link from "next/link";
 import { useStore } from "@/components/store";
 import { CatList } from "@/components/CatList";
+import { Checkbox } from "@/components/ui/checkbox";
 const catDescMap: Record<string, string> = {
   '"Dim Sim Do" Fundraising for War Nurses': `The "Dim Sim Do" was an event held on Friday, May 16, 1941, at the Town Hall in Melbourne to raise funds for the War Nurses' Comforts Fund. It featured continuous stage entertainment by Chinese artists, a dim sim luncheon and a Chinese afternoon tea.`,
 };
@@ -162,7 +163,7 @@ export default function Home() {
       window.removeEventListener("message", listener);
     };
   }, []);
-  const { accessibilityMode } = useStore();
+  const { accessibilityMode, setMode } = useStore();
 
   useEffect(() => {
     if (hasRendered.current) return;
@@ -237,15 +238,30 @@ export default function Home() {
         }}
         className="fixed top-0 left-0 bg-white rounded-full h-[3000px] w-[3000px]"
       >
-        <motion.button
+        <motion.div
           animate={{
             opacity: sunburstActive ? 1 : 0,
           }}
-          onClick={handleClose}
-          className="absolute top-[50%] left-[50%] p-4 bg-black text-white z-10"
+          className="absolute top-[50%] left-[50%] p-4 bg-black text-white z-10 h-12 flex items-center"
         >
-          Close
-        </motion.button>
+          <motion.button onClick={handleClose} className="p-4 text-white">
+            Close
+          </motion.button>
+
+          <div className="flex items-center space-x-2 bg-black">
+            <Checkbox
+              checked={accessibilityMode}
+              onCheckedChange={setMode}
+              id="terms"
+            />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Accessibility View
+            </label>
+          </div>
+        </motion.div>
 
         <div className={accessibilityMode ? " opacity-0" : "opacity-100"}>
           <div
