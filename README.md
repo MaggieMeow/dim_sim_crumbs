@@ -1,3 +1,6 @@
+# Dim Sim Crumbs
+Dim Sim Crumbs is an interactive web library showcasing over 700 historical Australian newspaper articles about the iconic Australian snack, dim sim. As a symbol of Australia's food multiculturalism, the dim sim's journey from Chinese cuisine to becoming a part of Australian food scene is a story worth exploring. This interactive library offers intuitive navigation with hierarchical categories, allowing you to explore the cultural history of dim sims in Australian society.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
