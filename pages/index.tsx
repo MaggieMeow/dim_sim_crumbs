@@ -101,15 +101,18 @@ export default function Home() {
       <main>
         <div className="my-4 mx-auto max-w-prose">
           <p className="py-2">
-            Welcome to the Dim Sim Crumbs, an interactive library showcasing
-            over 700 historical Australian newspaper articles about the iconic
-            Australian snack, dim sim. As a symbol of Australia's food
-            multiculturalism, the dim sim's journey from Chinese cuisine to
-            becoming a part of Australian food scene is a story worth exploring.
-            This interactive library offers intuitive navigation with
-            hierarchical categories, allowing you to explore the cultural
-            history of dim sims in Australian society.
-          </p>{" "}
+            Welcome to the Dim Sim Crumbs, an interactive library showcasing 754
+            historical Australian newspaper articles about the iconic Australian
+            snack, dim sim. As a symbol of Australia's food multiculturalism,
+            the dim sim's journey from Chinese cuisine to becoming a part of
+            Australian food scene is a story worth exploring. This interactive
+            library offers intuitive navigation with hierarchical categories,
+            allowing you to explore the cultural history of dim sims in
+            Australian society.
+          </p>
+          <p className="py-2 italic">
+            Warning: some articles may contain racist or offensive content.
+          </p>
           <p className="py-2">This site is best viewed on desktop.</p>
           {/* <button className="underline py-4" onClick={onboard}>
             Show user guide

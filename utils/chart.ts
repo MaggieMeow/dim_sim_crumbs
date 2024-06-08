@@ -116,6 +116,13 @@ const data = [
 ];
 
 export const option = {
+  aria: {
+    show: true,
+  },
+  title: {
+    text: "Article Categories. Switch to list view for improved screen reader compatibility.",
+    show: false,
+  },
   visualMap: {
     show: false,
     type: "continuous",
