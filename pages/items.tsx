@@ -180,6 +180,9 @@ export default function Home() {
       matchedArticles = articleIds.map((id: number) =>
         articles[id] ? { ...articles[id], id } : {}
       );
+      matchedArticles.sort((a, b) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      });
     }
   }
 
