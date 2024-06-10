@@ -217,6 +217,7 @@ export default function Home() {
 
       <motion.div
         id="sun"
+        tabIndex={0}
         onClick={() => {
           setSunburstActive(true);
         }}

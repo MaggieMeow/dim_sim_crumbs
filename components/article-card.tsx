@@ -16,6 +16,7 @@ export function ArticleCard(props: {
   const trove_link = "https://trove.nla.gov.au/newspaper/article/" + props.id;
   return (
     <div
+      tabIndex={0}
       content-visibility="auto"
       data-name="article-card"
       className="w-68 flex flex-col border-2 rounded-sm border-white p-4 hover:scale-105 transition-all ease-in-out"
