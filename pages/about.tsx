@@ -1,4 +1,40 @@
+import { useEffect } from "react";
+import { driver } from "driver.js";
+function onboard() {
+  const driverObj = driver({
+    popoverClass: "driverjs-theme",
+    overlayColor: "rgb(255 255 255 / 43%)",
+    showProgress: true,
+    steps: [
+      {
+        element: "#site-title",
+        popover: {
+          side: "top",
+          title: "About page",
+          description: "Information about the project and acknowledgements",
+        },
+      },
+    ],
+  });
+  driverObj.drive();
+  localStorage.setItem("about-onboarding", "true");
+}
 export default function About() {
+  useEffect(() => {
+    const listener = (ev: any) => {
+      if (ev.data === "show-help") {
+        onboard();
+      }
+    };
+    window.addEventListener("message", listener);
+
+    if (localStorage.getItem("about-onboarding")) {
+      return;
+    }
+    return () => {
+      window.removeEventListener("message", listener);
+    };
+  }, []);
   return (
     <div>
       <h1 className="mx-auto w-fit text-4xl">About</h1>
